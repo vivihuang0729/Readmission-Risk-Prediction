@@ -1,4 +1,5 @@
-'use client';
+"use client";
+
 import React, { useState } from 'react';
 
 // ======================== TYPE DEFINITIONS ========================
@@ -282,36 +283,19 @@ const ReadmissionRiskPredictor: React.FC = () => {
 
           {/* ============== COMORBIDITIES ============== */}
           <div>
-            <h3 className="text-lg font-medium border-b pb-2 mt-6">Comorbidities</h3>
-            <label className="block text-sm font-medium text-gray-700">
-              Elixhauser Comorbidity Score
-            </label>
-            <input
-              type="number"
-              name="elixhauserScore"
-              value={formData.elixhauserScore}
-              onChange={handleInputChange}
-              className="block w-full border p-2 rounded-md"
-            />
+            <h3 className="text-lg font-medium border-b pb-2">Comorbidities</h3>
+            <div className="mt-4">
+              <label className="block text-sm font-medium text-gray-700">Elixhauser Comorbidity Score</label>
+              <input 
+                type="number" 
+                name="elixhauserScore"
+                value={formData.elixhauserScore}
+                onChange={handleInputChange}
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+              />
+            </div>
           </div>
-          {/* ============== DISCHARGE SUMMARY UPLOAD ============== */}
-          <div>
-            <h3 className="text-lg font-medium border-b pb-2 mt-6">Discharge Summary</h3>
-            <p className="text-sm text-gray-500 mb-2">
-              Upload a patient discharge summary file (PDF, DOCX, or TXT)
-            </p>
-            <input
-              type="file"
-              accept=".pdf,.doc,.docx,.txt"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  alert(`File uploaded: ${file.name}`);
-                }
-              }}
-              className="block w-full text-sm text-gray-700 border border-gray-300 rounded-md p-2"
-            />
-          </div>
+          
           <div className="flex justify-center pt-6">
             <button
               type="submit"
