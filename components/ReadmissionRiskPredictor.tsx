@@ -117,12 +117,12 @@ const lowRiskExample: ReadmissionFormData = {
 // ======================== MOCK PREDICTION ========================
 const mockPredictReadmission = (formData: ReadmissionFormData): PredictionResult => {
   const scores = {
-    sofa: formData.creatinine > 1.5 ? 5 : 2,
-    sapsII: Math.floor(10 + formData.age / 2),
-    apsIII: Math.floor(20 + formData.bun / 2),
-    mlods: Math.floor(formData.creatinine + formData.bilirubin / 2),
-    sirs: formData.temperature > 100.4 ? 3 : 1,
-    elixhauserSID30: formData.elixhauserScore,
+  sofa: 7,
+  sapsII: 32,
+  apsIII: 48,
+  mlods: 3,
+  sirs: 2,
+  elixhauserSID30: 16,
   };
 
   const riskFactors = [
@@ -342,7 +342,6 @@ const ReadmissionRiskPredictor: React.FC = () => {
             <div className="bg-white p-4 rounded-lg">
               <h4 className="font-medium mb-2">Reasoning:</h4>
               <div className="bg-white p-4 rounded-lg">
-                <h4 className="font-medium mb-2">Reasoning:</h4>
                 <div className="text-gray-700 space-y-4 leading-relaxed">
                   {prediction?.reasoning
                     .split('\n')
