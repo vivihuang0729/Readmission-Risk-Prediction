@@ -47,34 +47,44 @@ interface PredictionResult {
 // ======================== EXAMPLES ========================
 // ======================== EXAMPLE 1 – HIGH RISK ========================
 const highRiskExample: ReadmissionFormData = {
-  gender: 'Male',
-  age: 68,
-  ethnicity: 'Caucasian',
-  admitDate: new Date().toISOString().split('T')[0],
+  gender: 'Female',
+  age: 74,
+  ethnicity: 'Group 2', // encoded value you described
+  admitDate: new Date().toISOString().split('T')[0],   // keep as today for UI
   dischargeDate: new Date().toISOString().split('T')[0],
-  isFirstStay: false,
-  hospitalExpireFlag: false,
-  icuDuration: 7, // stayed in ICU for sepsis and AKI
+  isFirstStay: false,           // Not first hospital stay (0)
+  hospitalExpireFlag: false,    // No hospital death (0)
 
-  // Vitals / Labs
-  heartRate: 92,
-  respiratoryRate: 20,
-  temperature: 99.1,
-  wbcCount: 13.5,
-  plateletCount: 180,
-  creatinine: 1.9,
-  bilirubin: 0.9,
-  bun: 34,
-  glucose: 150,
-  map: 72,
+  // ICU stay duration
+  icuDuration: 5,                // LOS ICU = 5 days
+
+  // ======== VITALS ========
+  heartRate: 110,               // bpm
+  respiratoryRate: 28,          // breaths / min
+  temperature: 100.2,           // Fahrenheit
+  map: 68,                      // mmHg
+
+  // ======== LAB RESULTS ========
+  wbcCount: 16.2,
+  plateletCount: 210,
+  creatinine: 1.4,
+  bun: 28,
+  bilirubin: 0.7,
+  glucose: 182,
+
+  // ======== NEUROLOGICAL ========
   gcsEye: 4,
   gcsVerbal: 5,
   gcsMotor: 6,
-  pao2Fio2: 280,
-  urineOutput: 1300,
 
-  // Comorbidity index
-  elixhauserScore: 12,
+  // ======== RESPIRATORY ========
+  pao2Fio2: 180,                // ventilated P/F ratio
+
+  // ======== RENAL ========
+  urineOutput: 1600,            // mL/day
+
+  // ======== COMORBIDITY INDEX ========
+  elixhauserScore: 16,          // ELIXHAUSERSID30
 };
 
 const lowRiskExample: ReadmissionFormData = {
@@ -180,7 +190,7 @@ const ReadmissionRiskPredictor: React.FC = () => {
           onChange={handleExampleChange}
           className="border border-gray-300 rounded-lg p-2 text-sm bg-gray-50"
         >
-          <option value="high">Example 1 – High Risk (68M)</option>
+          <option value="high">Example 1 – High Risk (74F)</option>
           <option value="low">Example 2 – Low Risk (37F)</option>
         </select>
       </div>
