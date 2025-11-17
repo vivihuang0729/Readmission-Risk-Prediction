@@ -130,7 +130,7 @@ const mockPredictReadmission = (formData: ReadmissionFormData): PredictionResult
   const probability = willBeReadmitted ? 0.34 : 0.12;
 
   const reasoning = willBeReadmitted
-    ? `T Based on the provided data, it appears that the patient is a 74-year-old female with an ethnicity group of 2 who has had one ICU stay, with a hospitalization lasting 6 days and an ICU stay of 5 days. The patient has been diagnosed with acute respiratory failure due to COPD exacerbation, requiring BiPAP for a short period followed by invasive ventilation, and eventually extubated on the fourth day.
+    ? `   Based on the provided data, it appears that the patient is a 74-year-old female with an ethnicity group of 2 who has had one ICU stay, with a hospitalization lasting 6 days and an ICU stay of 5 days. The patient has been diagnosed with acute respiratory failure due to COPD exacerbation, requiring BiPAP for a short period followed by invasive ventilation, and eventually extubated on the fourth day.
 
           The clinical scores suggest that the patient is critically ill, as indicated by high SOFA (7), SAPSII (32), APSIII (48), mLODS (3), and ELIXHAUSERSID30 (16) scores. The high SOFA score suggests multiple organ dysfunction, while the high SAPS II score indicates a high risk of mortality. The high APS III score suggests that the patient is in a severe condition.
 
@@ -331,7 +331,17 @@ const ReadmissionRiskPredictor: React.FC = () => {
 
             <div className="bg-white p-4 rounded-lg">
               <h4 className="font-medium mb-2">Reasoning:</h4>
-              <p className="text-gray-700">{prediction?.reasoning}</p>
+              <div className="bg-white p-4 rounded-lg">
+                <h4 className="font-medium mb-2">Reasoning:</h4>
+                <div className="text-gray-700 space-y-4 leading-relaxed">
+                  {prediction?.reasoning
+                    .split('\n')
+                    .filter((p) => p.trim() !== '')
+                    .map((p, i) => (
+                      <p key={i}>{p.trim()}</p>
+                    ))}
+                </div>
+              </div>
             </div>
           </div>
 
