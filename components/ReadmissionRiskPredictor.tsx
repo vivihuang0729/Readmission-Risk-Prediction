@@ -127,15 +127,13 @@ const mockPredictReadmission = (formData: ReadmissionFormData): PredictionResult
 
   const riskScore = riskFactors.filter(Boolean).length;
   const willBeReadmitted = riskScore >= 3;
-  const probability = willBeReadmitted ? 0.67 : 0.12;
-
-  const reasoning = willBeReadmitted
-    ? `The patient's high SOFA score (5) indicates severe organ dysfunction due to sepsis and acute kidney injury. 
-  The SAPSII, APSIII, mLODS, and SIRS scores also suggest a high risk of mortality and morbidity. 
-  Comparatively, the retrieved cases have lower scores in these categories, indicating less severe conditions. 
-  Additionally, the presence of an infection (positive blood culture for Klebsiella pneumoniae) and ongoing comorbidities such as diabetes mellitus and hypertension contribute to the increased risk of readmission within 30 days.`
-  : `The patient’s overall condition appears stable with lower severity scores, suggesting a lower likelihood of readmission within 30 days.`;
-  return { willBeReadmitted, probability, reasoning, scores };
+  
+  // Generate reasoning based on risk factors
+  let reasoning = willBeReadmitted ? 
+    `Based on analysis of the patient's data, there is a significant risk of readmission within 30 days. Key factors include ${formData.age > 65 ? 'advanced age, ' : ''}${!formData.isFirstStay ? 'previous hospitalization, ' : ''}${formData.icuDuration > 5 ? 'extended ICU stay, ' : ''}${formData.creatinine > 1.5 ? 'elevated creatinine levels, ' : ''}${scores.sofa > 5 ? 'high SOFA score, ' : ''}${scores.sapsII > 30 ? 'concerning SAPS-II probability, ' : ''}${scores.elixhauserSID30 > 5 ? 'multiple comorbidities ' : ''} that collectively suggest a need for enhanced post-discharge care planning and follow-up.` :
+    `The patient appears to have a lower risk of readmission based on the provided clinical parameters. The relatively ${formData.age <= 65 ? 'younger age, ' : ''}${formData.isFirstStay ? 'first hospital admission, ' : ''}${formData.icuDuration <= 5 ? 'shorter ICU stay, ' : ''}${formData.creatinine <= 1.5 ? 'normal kidney function, ' : ''}${scores.sofa <= 5 ? 'lower SOFA score, ' : ''} and ${scores.elixhauserSID30 <= 5 ? 'fewer comorbidities ' : ''} suggest a favorable post-discharge trajectory. Standard follow-up care is recommended.`;
+  
+  return { willBeReadmitted, reasoning, scores };
 };
 
 // ======================== MAIN COMPONENT ========================
