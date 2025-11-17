@@ -127,14 +127,23 @@ const mockPredictReadmission = (formData: ReadmissionFormData): PredictionResult
 
   const riskScore = riskFactors.filter(Boolean).length;
   const willBeReadmitted = riskScore >= 3;
-  const probability = willBeReadmitted ? 0.67 : 0.12;
+  const probability = willBeReadmitted ? 0.34 : 0.12;
 
   const reasoning = willBeReadmitted
-    ? `The patient's high SOFA score (5) indicates severe organ dysfunction due to sepsis and acute kidney injury. 
-  The SAPSII, APSIII, mLODS, and SIRS scores also suggest a high risk of mortality and morbidity. 
-  Comparatively, the retrieved cases have lower scores in these categories, indicating less severe conditions. 
-  Additionally, the presence of an infection (positive blood culture for Klebsiella pneumoniae) and ongoing comorbidities such as diabetes mellitus and hypertension contribute to the increased risk of readmission within 30 days.`
-  : `The patient’s overall condition appears stable with lower severity scores, suggesting a lower likelihood of readmission within 30 days.`;
+    ? `T Based on the provided data, it appears that the patient is a 74-year-old female with an ethnicity group of 2 who has had one ICU stay, with a hospitalization lasting 6 days and an ICU stay of 5 days. The patient has been diagnosed with acute respiratory failure due to COPD exacerbation, requiring BiPAP for a short period followed by invasive ventilation, and eventually extubated on the fourth day.
+
+          The clinical scores suggest that the patient is critically ill, as indicated by high SOFA (7), SAPSII (32), APSIII (48), mLODS (3), and ELIXHAUSERSID30 (16) scores. The high SOFA score suggests multiple organ dysfunction, while the high SAPS II score indicates a high risk of mortality. The high APS III score suggests that the patient is in a severe condition.
+
+          The laboratory results show an increased white blood cell count (16.2), decreased platelet count (210), and elevated creatinine level (1.4) indicating kidney impairment. The respiratory data shows a low PaO2/FiO2 ratio (180) suggesting hypoxemia, which is consistent with the diagnosis of acute respiratory failure.
+
+          The neurological status indicates reduced consciousness as indicated by a low GCS score. The urine output of 1600 mL/day suggests that the kidneys are functioning at some level.
+
+          Given the high-risk scores and the patient's critical condition, it is important to closely monitor the patient for any signs of deterioration and provide appropriate supportive care to manage complications.
+
+          Regarding the similar cases, Case 1, Case 2, and Case 3 all involve elderly female patients with acute respiratory failure due to COPD exacerbation, requiring ICU stay and mechanical ventilation. The similarity score suggests that these cases are very similar to the current case.
+
+          RISK=0.5|NOTE=The patient is at high risk of mortality due to severe acute respiratory failure, multiple organ dysfunction, and high-risk clinical scores. Close monitoring and appropriate supportive care are essential to manage complications and improve outcomes.`
+    : `The patient’s overall condition appears stable with lower severity scores, suggesting a lower likelihood of readmission within 30 days.`;
   return { willBeReadmitted, probability, reasoning, scores };
 };
 
