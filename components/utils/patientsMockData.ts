@@ -23,7 +23,7 @@ export const patients = [
     {
       name: "Jessica Taylor",
       gender: "Female",
-      age: 28,
+      age: 74,
       image: "images/patientprofile.png",
       isActive: true
     },
@@ -47,9 +47,9 @@ export const patient = [
 	{
 		"name": "Jessica Taylor",
 		"gender": "Female",
-		"age": 28,
+		"age": 74,
 		"profile_picture": "https://fedskillstest.ct.digital/4.png",
-		"date_of_birth": "1996-08-23",
+		"date_of_birth": "1951-06-12",
 		"phone_number": "(415) 555-1234",
 		"emergency_contact": "(415) 555-5678",
 		"insurance_type": "Sunrise Health Assurance",
@@ -68,15 +68,15 @@ export const patient = [
 					}
 				},
 				"heart_rate": {
-					"value": 78,
-					"levels": "Lower than Average"
+					"value": 110,
+					"levels": "Higher than Average"
 				},
 				"respiratory_rate": {
-					"value": 20,
+					"value": 28,
 					"levels": "Normal"
 				},
 				"temperature": {
-					"value": 98.6,
+					"value": 98,
 					"levels": "Normal"
 				}
 			}

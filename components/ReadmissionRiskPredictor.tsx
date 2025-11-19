@@ -45,8 +45,8 @@ interface PredictionResult {
 }
 
 // ======================== EXAMPLES ========================
-// ======================== EXAMPLE 1 – HIGH RISK ========================
-const highRiskExample: ReadmissionFormData = {
+// ======================== EXAMPLE 1 – low RISK ========================
+const lowRiskExample: ReadmissionFormData = {
   gender: 'Female',
   age: 74,
   ethnicity: 'Group 2', // encoded value you described
@@ -87,32 +87,6 @@ const highRiskExample: ReadmissionFormData = {
   elixhauserScore: 16,          // ELIXHAUSERSID30
 };
 
-const lowRiskExample: ReadmissionFormData = {
-  gender: 'Female',
-  age: 37,
-  ethnicity: 'Caucasian',
-  admitDate: new Date().toISOString().split('T')[0],
-  dischargeDate: new Date().toISOString().split('T')[0],
-  isFirstStay: true,
-  hospitalExpireFlag: false,
-  icuDuration: 2,
-  heartRate: 80,
-  respiratoryRate: 16,
-  temperature: 98.4,
-  wbcCount: 8.0,
-  plateletCount: 270,
-  creatinine: 0.9,
-  bilirubin: 0.6,
-  bun: 12,
-  glucose: 100,
-  map: 80,
-  gcsEye: 4,
-  gcsVerbal: 5,
-  gcsMotor: 6,
-  pao2Fio2: 350,
-  urineOutput: 1500,
-  elixhauserScore: 2,
-};
 
 // ======================== MOCK PREDICTION ========================
 const mockPredictReadmission = (formData: ReadmissionFormData): PredictionResult => {
@@ -159,12 +133,12 @@ const mockPredictReadmission = (formData: ReadmissionFormData): PredictionResult
 
 // ======================== MAIN COMPONENT ========================
 const ReadmissionRiskPredictor: React.FC = () => {
-  const [formData, setFormData] = useState<ReadmissionFormData>(highRiskExample);
+  const [formData, setFormData] = useState<ReadmissionFormData>(lowRiskExample);
   const [prediction, setPrediction] = useState<PredictionResult | null>(null);
   const [showPrediction, setShowPrediction] = useState(false);
 
   const handleExampleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFormData(e.target.value === 'high' ? highRiskExample : lowRiskExample);
+    setFormData(e.target.value === 'high' ? lowRiskExample : lowRiskExample);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -186,13 +160,6 @@ const ReadmissionRiskPredictor: React.FC = () => {
     <section className="rounded-3xl p-5 bg-white divide-y divide-gray-100">
       <div className="flex items-center justify-between pb-5">
         <h2 className="text-2xl font-medium">Readmission Risk Predictor</h2>
-        <select
-          onChange={handleExampleChange}
-          className="border border-gray-300 rounded-lg p-2 text-sm bg-gray-50"
-        >
-          <option value="high">Example 1 – High Risk (74F)</option>
-          <option value="low">Example 2 – Low Risk (37F)</option>
-        </select>
       </div>
 
       {!showPrediction ? (
@@ -313,6 +280,20 @@ const ReadmissionRiskPredictor: React.FC = () => {
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
               />
             </div>
+          </div>
+        
+          {/* ============== DISCHARGE SUMMARY ============== */}
+          <div className="mt-6">
+            <h3 className="text-lg font-medium border-b pb-2">Discharge Summary</h3>
+
+            <label className="block text-sm font-medium text-gray-700 mt-4">
+              Upload Discharge Summary (PDF or TXT)
+            </label>
+            <input 
+              type="file" 
+              accept=".pdf,.txt" 
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+            />
           </div>
           
           <div className="flex justify-center pt-6">

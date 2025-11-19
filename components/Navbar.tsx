@@ -21,7 +21,7 @@ import MenuIcon from './icons/MenuIcon'
 
 const navigation = [
   { name: 'Patients', href: '/', svgIcon: <GroupIcon /> },
-  { name: 'Readmission', href: '/readmission', svgIcon: <CalendarTodayIcon /> },
+  { name: 'Readmission Prediction', href: '/readmission', svgIcon: <CalendarTodayIcon /> },
 ]
 
 //@ts-ignore

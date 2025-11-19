@@ -23,7 +23,7 @@ export const diagnosticHistoryCards = [
         src : '/images/HeartBPM@2x.png',
         alt: 'Heart Rate',
         title: 'Heart Rate', 
-        value: 78,
-        levels: 'Lower than Average'
+        value: 110,
+        levels: 'Higher than Average'
     }
 ]
