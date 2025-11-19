@@ -158,26 +158,24 @@ const ReadmissionRiskPredictor: React.FC = () => {
     setPrediction(result);
     setShowPrediction(true);
     setLoading(false);
-  }, 2000); // 2.0s loading
+  }, 8000); // 5.0s loading
 };
 
 if (loading) {
-  return (
-    <section className="rounded-3xl p-10 bg-white text-center">
-      <h2 className="text-xl font-medium">Analyzing Patient Data...</h2>
+    return (
+      <section className="rounded-3xl p-10 bg-white text-center mt-10">
+        <h2 className="text-xl font-medium">Analyzing Patient Data...</h2>
 
-      <div className="flex justify-center mt-6">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-teal-400 border-solid"></div>
-      </div>
+        <div className="flex justify-center mt-6">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-teal-400 border-solid"></div>
+        </div>
 
-      <p className="text-gray-500 mt-4">
-        Please wait while we process the discharge summary and vitals...
-      </p>
-    </section>
-  );
-}
-
-
+        <p className="text-gray-500 mt-4">
+          Please wait while our multimodal model processes the discharge summary, vitals, and structured clinical inputs…
+        </p>
+      </section>
+    );
+  }
 
   return (
     <section className="rounded-3xl p-5 bg-white divide-y divide-gray-100">
